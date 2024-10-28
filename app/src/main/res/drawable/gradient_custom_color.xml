@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="oval">
+            <gradient
+                android:centerColor="@color/primay_color"
+                android:endColor="@color/primay_color"
+                android:startColor="@color/primay_color"/>
+        </shape>
+    </item>
+
+    <item
+        android:width="24dp"
+        android:height="24dp"
+        android:drawable="@drawable/icon_search"
+        android:gravity="center" />
+
+
+</layer-list>

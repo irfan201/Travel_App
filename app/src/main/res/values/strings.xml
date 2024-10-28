@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Travel App</string>
+    <string name="travel_app">Travel App</string>
+    <string name="on_board_tittle">Life is short and the\nworld is wide</string>
+    <string name="text_onBoard_desc">At Friends tours and travel, we customize reliable and trutworthy educational tours to destinations all over the world</string>
+    <string name="get_started">Get Started</string>
+    <string name="sign_in_now">Sign In Now</string>
+    <string name="sign_desc">Please sign in to continue our app</string>
+    <string name="input_your_email">Input Your Email</string>
+    <string name="sign_in">Sign In</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name">Leonardo</string>
+    <string name="tittle_home">Explore the\nBeautiful world!</string>
+    <string name="best_destination">Best Destination</string>
+    <string name="profile">Profile</string>
+    <string name="preference">Preference</string>
+    <string name="text_email">leonardo@gmail.com</string>
+    <string name="niladri_reservoir">Niladri Reservoir</string>
+    <string name="tekergat_sunamgnj">Tekergat, Sunamgnj</string>
+    <string name="about_destination">About Destination</string>
+    <string name="desc_about">You will get a complete travel package on the beaches. Packages in the form of airline tickets, recommended Hotel rooms, Transportation, Have you ever been on holiday to the Greek ETC</string>
+    <string name="save_destination">Save Destination</string>
+    <string name="search">Search</string>
+    <string name="search_places">Search Places</string>
+    <string name="details">Details</string>
+    <string name="save">Save</string>
+    <string name="add_notes">Add Notes</string>
+    <string name="messages">Messages</string>
+    <string name="search_for_chats_messages">Search for messages</string>
+    <string name="sajib_rahman">Sajib Rahman</string>
+    <string name="message">Hi, John! 👋 How are you doing?</string>
+    <string name="_08_42">08:42</string>
+</resources>
