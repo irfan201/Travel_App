@@ -11,23 +11,15 @@
         android:id="@+id/btn_itinerary"
         android:icon="@drawable/baseline_airplane_ticket_24"/>
 
-    <item
-        android:title=""
-        android:enabled="false"/>
-
-
-
-    <item
-        android:title="Message"
-        android:id="@+id/btn_message"
-        android:icon="@drawable/chat"/>
-
-
 
     <item
         android:title="Profile"
         android:id="@+id/btn_profile"
         android:icon="@drawable/profile"/>
+
+    <item
+        android:title=""
+        android:enabled="false"/>
 
 
 </menu>

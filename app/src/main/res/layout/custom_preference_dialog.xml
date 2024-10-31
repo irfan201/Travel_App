@@ -10,7 +10,7 @@
         android:id="@+id/tv_tittle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="choose your prefered destination"
+        android:text="Choose your prefered destination"
         android:textColor="@color/text_color"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -32,7 +32,7 @@
             android:backgroundTint="@drawable/selector_preference"
             android:checkable="true"
             android:clickable="true"
-            android:text="museum" />
+            android:text="Museum" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/ch_nature"
@@ -41,7 +41,7 @@
             android:backgroundTint="@drawable/selector_preference"
             android:checkable="true"
             android:clickable="true"
-            android:text="alam" />
+            android:text="Alam" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/ch_culinary"
@@ -50,7 +50,7 @@
             android:backgroundTint="@drawable/selector_preference"
             android:checkable="true"
             android:clickable="true"
-            android:text="kuliner" />
+            android:text="Kuliner" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/ch_market"
@@ -59,7 +59,7 @@
             android:backgroundTint="@drawable/selector_preference"
             android:checkable="true"
             android:clickable="true"
-            android:text="pasar" />
+            android:text="Pasar" />
     </com.google.android.material.chip.ChipGroup>
 
     <Button

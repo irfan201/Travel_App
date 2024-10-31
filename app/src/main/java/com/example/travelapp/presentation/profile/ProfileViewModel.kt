@@ -1,11 +1,9 @@
 package com.example.travelapp.presentation.profile
 
 import androidx.lifecycle.ViewModel
-import com.example.travelapp.data.model.LoginResponse
 import com.example.travelapp.domain.model.UserState
 import com.example.travelapp.domain.usecase.UserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
@@ -30,6 +28,10 @@ class ProfileViewModel @Inject constructor(private val userUseCase: UserUseCase)
 
     suspend fun saveType(type:String){
         userUseCase.saveType(type)
+    }
+
+     fun getType():String?{
+        return userUseCase.getType()
 
     }
 

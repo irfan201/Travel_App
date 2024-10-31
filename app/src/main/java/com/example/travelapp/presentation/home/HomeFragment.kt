@@ -76,30 +76,33 @@ class HomeFragment : Fragment(), ItemListener {
         lifecycleScope.launch {
             if (viewModel.getType() == null) {
                 showDialogPreference()
+                binding?.tvBest?.text = "Best Destinations"
             } else {
                 listTravels.clear()
                 viewModel.getTravelType(token, page, dataType)
+                binding?.tvBest?.text = dataType.replaceFirstChar { it.uppercase() }
             }
             initData()
         }
 
 
+
         binding?.swipeRefresh?.setOnRefreshListener {
             lifecycleScope.launch {
-            listTravels.clear()
-            adapter.notifyDataSetChanged()
-            page = 1
+                listTravels.clear()
+                adapter.notifyDataSetChanged()
+                page = 1
                 viewModel.getTravelType(token, page, dataType)
             }
         }
 
 
 
-        binding?.tvBest?.text = dataType
+
+
         binding?.tvViewAll?.setOnClickListener {
             startActivity(Intent(requireActivity(), ListAllActivity::class.java))
         }
-
 
 
     }
@@ -172,7 +175,7 @@ class HomeFragment : Fragment(), ItemListener {
                     R.id.ch_museum -> {
                         listTravels.clear()
                         lifecycleScope.launch {
-                            viewModel.saveType(dialogBinding.chMuseum.text.toString())
+                            viewModel.saveType("museum")
                             viewModel.getTravelType(
                                 token,
                                 page,
@@ -185,7 +188,7 @@ class HomeFragment : Fragment(), ItemListener {
                     R.id.ch_market -> {
                         listTravels.clear()
                         lifecycleScope.launch {
-                            viewModel.saveType(dialogBinding.chMarket.text.toString())
+                            viewModel.saveType("pasar")
                             viewModel.getTravelType(
                                 token,
                                 page,
@@ -197,7 +200,7 @@ class HomeFragment : Fragment(), ItemListener {
                     R.id.ch_culinary -> {
                         listTravels.clear()
                         lifecycleScope.launch {
-                            viewModel.saveType(dialogBinding.chCulinary.text.toString())
+                            viewModel.saveType("kuliner")
                             viewModel.getTravelType(
                                 token,
                                 page,
@@ -209,7 +212,7 @@ class HomeFragment : Fragment(), ItemListener {
                     R.id.ch_nature -> {
                         listTravels.clear()
                         lifecycleScope.launch {
-                            viewModel.saveType(dialogBinding.chNature.text.toString())
+                            viewModel.saveType("alam")
                             viewModel.getTravelType(
                                 token,
                                 page,
@@ -247,7 +250,6 @@ class HomeFragment : Fragment(), ItemListener {
                     lifecycleScope.launch {
                         viewModel.getTravelType(token, page, viewModel.getType().toString())
                     }
-
 
 
                 }

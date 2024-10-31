@@ -40,10 +40,6 @@ class MainActivity : AppCompatActivity() {
                         true
                     }
 
-                    R.id.btn_message ->{
-                        replaceFragment(MessageFragment())
-                        true
-                    }
 
                     R.id.btn_itinerary ->{
                         replaceFragment(ListItineraryFragment())

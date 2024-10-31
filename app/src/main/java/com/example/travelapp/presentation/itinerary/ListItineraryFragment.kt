@@ -49,6 +49,11 @@ class ListItineraryFragment : Fragment(), ItemListener {
                     is TravelLocalState.Success -> {
                         val dataTravel = value.data
                         showRecycleView(dataTravel)
+                        if (dataTravel.isEmpty()){
+                            binding?.ivNoData?.visibility = View.VISIBLE
+                        }else{
+                            binding?.ivNoData?.visibility = View.GONE
+                        }
                     }
                 }
             }

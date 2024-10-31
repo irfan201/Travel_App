@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.travelapp.R
@@ -103,35 +102,50 @@ class ProfileFragment : Fragment() {
 
     private fun showDialogPreference() {
         val dialogBinding = CustomPreferenceDialogBinding.inflate(layoutInflater)
-        val dialog = androidx.appcompat.app.AlertDialog.Builder(requireContext()).create()
+        val dialog = AlertDialog.Builder(requireContext()).create()
 
         dialog.setView(dialogBinding.root)
 
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.show()
         dialogBinding.btnNext.text = "Save"
+        val saveType = viewModel.getType()
+        when(saveType){
+            "museum" -> {
+                dialogBinding.cgDestination.check(R.id.ch_museum)
+            }
+            "pasar" -> {
+                dialogBinding.cgDestination.check(R.id.ch_market)
+                }
+            "kuliner" -> {
+                dialogBinding.cgDestination.check(R.id.ch_culinary)
+            }
+            "alam" -> {
+                dialogBinding.cgDestination.check(R.id.ch_nature)
+            }
+        }
 
         dialogBinding.btnNext.setOnClickListener {
                 when(dialogBinding.cgDestination.checkedChipId){
                     R.id.ch_museum -> {
                         lifecycleScope.launch {
-                            viewModel.saveType(dialogBinding.chMuseum.text.toString())
+                            viewModel.saveType("museum")
                         }
 
                     }
                     R.id.ch_market -> {
                         lifecycleScope.launch {
-                            viewModel.saveType(dialogBinding.chMarket.text.toString())
+                            viewModel.saveType("pasar")
                         }
                     }
                     R.id.ch_culinary -> {
                         lifecycleScope.launch {
-                            viewModel.saveType(dialogBinding.chCulinary.text.toString())
+                            viewModel.saveType("kuliner")
                         }
                     }
                     R.id.ch_nature -> {
                         lifecycleScope.launch {
-                            viewModel.saveType(dialogBinding.chNature.text.toString())
+                            viewModel.saveType("alam")
                         }
                     }
                 }
