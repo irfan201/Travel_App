@@ -26,22 +26,40 @@
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/ch_beach"
+            android:id="@+id/ch_museum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@drawable/selector_preference"
             android:checkable="true"
             android:clickable="true"
-            android:text="Beach" />
+            android:text="museum" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/ch_mountain"
+            android:id="@+id/ch_nature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@drawable/selector_preference"
             android:checkable="true"
             android:clickable="true"
-            android:text="Mountain" />
+            android:text="alam" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/ch_culinary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@drawable/selector_preference"
+            android:checkable="true"
+            android:clickable="true"
+            android:text="kuliner" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/ch_market"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@drawable/selector_preference"
+            android:checkable="true"
+            android:clickable="true"
+            android:text="pasar" />
     </com.google.android.material.chip.ChipGroup>
 
     <Button

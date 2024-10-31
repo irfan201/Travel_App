@@ -7,8 +7,8 @@
         android:icon="@drawable/home"/>
 
     <item
-        android:title="plan"
-        android:id="@+id/btn_plan"
+        android:title="Itinerary"
+        android:id="@+id/btn_itinerary"
         android:icon="@drawable/baseline_airplane_ticket_24"/>
 
     <item

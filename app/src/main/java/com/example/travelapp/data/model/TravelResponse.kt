@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class TravelResponse(
     @SerializedName("data")
-    val `data`: List<Data>,
+    val `data`: List<DataTravel>,
     @SerializedName("message")
     val message: String,
     @SerializedName("page")
@@ -19,7 +19,7 @@ data class TravelResponse(
     @SerializedName("totalPage")
     val totalPage: Int
 ) {
-    data class Data(
+    data class DataTravel(
         @SerializedName("activity")
         val activity: String,
         @SerializedName("description")

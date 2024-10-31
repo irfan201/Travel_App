@@ -32,4 +32,9 @@ class LoginViewModel @Inject constructor(private val userUseCase: UserUseCase):V
 
     }
 
+    fun getLogin():String?{
+        return userUseCase.getLogin()
+
+    }
+
 }

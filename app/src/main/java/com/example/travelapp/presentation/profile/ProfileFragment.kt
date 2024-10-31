@@ -51,6 +51,10 @@ class ProfileFragment : Fragment() {
             cvPreference.setOnClickListener {
                 showDialogPreference()
             }
+
+            cvProfile.setOnClickListener {
+                startActivity(Intent(requireActivity(), DetailProfileActivity::class.java))
+            }
         }
         lifecycleScope.launch {
             viewModel.getProfile()
@@ -105,18 +109,34 @@ class ProfileFragment : Fragment() {
 
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.show()
-        dialog.setCancelable(false)
+        dialogBinding.btnNext.text = "Save"
 
         dialogBinding.btnNext.setOnClickListener {
-            if (dialogBinding.cgDestination.checkedChipId == -1){
-                Toast.makeText(requireContext(), "Please choose destination", Toast.LENGTH_SHORT).show()
-            } else{
                 when(dialogBinding.cgDestination.checkedChipId){
-                    R.id.ch_beach -> Toast.makeText(requireContext(), dialogBinding.chBeach.text, Toast.LENGTH_SHORT).show()
-                    R.id.ch_mountain -> Toast.makeText(requireContext(), dialogBinding.chMountain.text, Toast.LENGTH_SHORT).show()
+                    R.id.ch_museum -> {
+                        lifecycleScope.launch {
+                            viewModel.saveType(dialogBinding.chMuseum.text.toString())
+                        }
+
+                    }
+                    R.id.ch_market -> {
+                        lifecycleScope.launch {
+                            viewModel.saveType(dialogBinding.chMarket.text.toString())
+                        }
+                    }
+                    R.id.ch_culinary -> {
+                        lifecycleScope.launch {
+                            viewModel.saveType(dialogBinding.chCulinary.text.toString())
+                        }
+                    }
+                    R.id.ch_nature -> {
+                        lifecycleScope.launch {
+                            viewModel.saveType(dialogBinding.chNature.text.toString())
+                        }
+                    }
                 }
                 dialog.dismiss()
-            }
+            Toast.makeText(requireContext(), "Type saved", Toast.LENGTH_SHORT).show()
         }
     }
 

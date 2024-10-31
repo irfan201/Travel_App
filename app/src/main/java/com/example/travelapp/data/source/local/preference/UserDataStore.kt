@@ -3,6 +3,7 @@ package com.example.travelapp.data.source.local.preference
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -22,6 +23,30 @@ class UserDataStore @Inject constructor(private val dataStore: DataStore<Prefere
     suspend fun saveLogin(token: String) {
         dataStore.edit { preference ->
             preference[TOKEN] = token
+        }
+    }
+
+    suspend fun saveStart(start: Boolean) {
+        dataStore.edit { preference ->
+            preference[START] = start
+        }
+    }
+
+    fun getStart(): Boolean {
+        return runBlocking(Dispatchers.IO) {
+            dataStore.data.first()[START] ?: false
+        }
+    }
+
+    suspend fun saveType(type: String){
+        dataStore.edit { preference ->
+            preference[TYPE] = type
+        }
+    }
+
+    fun getType(): String? {
+        return runBlocking(Dispatchers.IO) {
+            dataStore.data.first()[TYPE]
         }
     }
 
@@ -65,6 +90,8 @@ class UserDataStore @Inject constructor(private val dataStore: DataStore<Prefere
 
     companion object {
 
+        val TYPE = stringPreferencesKey("type")
+        val START = booleanPreferencesKey("start")
         val TOKEN = stringPreferencesKey("token")
         val AVATAR = stringPreferencesKey("avatar")
         val EMAIL = stringPreferencesKey("email")

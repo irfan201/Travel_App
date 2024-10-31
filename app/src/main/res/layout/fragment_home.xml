@@ -74,6 +74,17 @@
         app:layout_constraintStart_toStartOf="@id/tv_home_tittle"
         app:layout_constraintTop_toBottomOf="@id/tv_home_tittle" />
 
+        <TextView
+            android:id="@+id/tv_view_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View All"
+            android:textSize="14sp"
+            android:textColor="@color/orange"
+            app:layout_constraintTop_toTopOf="@id/tv_best"
+            app:layout_constraintBottom_toBottomOf="@id/tv_best"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="0dp"

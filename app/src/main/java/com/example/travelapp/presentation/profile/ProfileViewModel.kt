@@ -28,6 +28,11 @@ class ProfileViewModel @Inject constructor(private val userUseCase: UserUseCase)
         }
     }
 
+    suspend fun saveType(type:String){
+        userUseCase.saveType(type)
+
+    }
+
 
 
 }

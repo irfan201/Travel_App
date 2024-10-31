@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,26 +17,28 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.travelapp.R
 import com.example.travelapp.data.model.TravelResponse
 import com.example.travelapp.databinding.CustomPreferenceDialogBinding
 import com.example.travelapp.databinding.FragmentHomeBinding
 import com.example.travelapp.domain.model.TravelState
-import com.example.travelapp.presentation.DetailActivity
+import com.example.travelapp.presentation.detail.DetailActivity
+import com.example.travelapp.presentation.detail.DetailActivity.Companion.ID_TRAVEL
 import com.example.travelapp.presentation.adapter.ItemListener
 import com.example.travelapp.presentation.adapter.TravelAdapter
+import com.example.travelapp.presentation.all.ListAllActivity
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment(), ItemListener {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding
-    private var index = 1
-    private val token =
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
-
-    private val listTravels = mutableListOf<TravelResponse.Data>()
+    private var page = 1
+    private lateinit var token: String
+    private val listTravels = mutableListOf<TravelResponse.DataTravel>()
     private val viewModel: HomeViewModel by activityViewModels()
+    private lateinit var adapter: TravelAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +50,7 @@ class HomeFragment : Fragment(), ItemListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        token = "Bearer ${viewModel.getLogin()}"
         val stringTittle = getString(R.string.tittle_home)
         val spannableString = SpannableString(stringTittle)
         val totalLength = stringTittle.length
@@ -67,20 +69,57 @@ class HomeFragment : Fragment(), ItemListener {
         )
         binding?.tvHomeTittle?.text = spannableString
 
-        binding?.swipeRefresh?.setOnRefreshListener {
-            listTravels.clear()
-            viewModel.getTravel(index,token)
+        initProfile()
+        val dataType = viewModel.getType().toString()
+
+
+        lifecycleScope.launch {
+            if (viewModel.getType() == null) {
+                showDialogPreference()
+            } else {
+                listTravels.clear()
+                viewModel.getTravelType(token, page, dataType)
+            }
+            initData()
         }
 
-//        showDialogPreference()
 
-        initData()
+        binding?.swipeRefresh?.setOnRefreshListener {
+            lifecycleScope.launch {
+            listTravels.clear()
+            adapter.notifyDataSetChanged()
+            page = 1
+                viewModel.getTravelType(token, page, dataType)
+            }
+        }
 
+
+
+        binding?.tvBest?.text = dataType
+        binding?.tvViewAll?.setOnClickListener {
+            startActivity(Intent(requireActivity(), ListAllActivity::class.java))
+        }
+
+
+
+    }
+
+    private fun initProfile() {
+        viewModel.getProfile()
+        lifecycleScope.launch {
+            val dataUser = viewModel.user.value
+            binding?.tvName?.text = dataUser?.firstName
+            binding?.ivProfile?.let {
+                Glide.with(requireContext())
+                    .load(dataUser?.avatar)
+                    .circleCrop()
+                    .into(it)
+            }
+        }
     }
 
     private fun initData() {
         binding?.apply {
-            viewModel.getTravel(index, token)
             lifecycleScope.launch {
                 viewModel.travelState.collect { value ->
                     when (value) {
@@ -130,20 +169,58 @@ class HomeFragment : Fragment(), ItemListener {
                     .show()
             } else {
                 when (dialogBinding.cgDestination.checkedChipId) {
-                    R.id.ch_beach -> Toast.makeText(
-                        requireContext(),
-                        dialogBinding.chBeach.text,
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    R.id.ch_museum -> {
+                        listTravels.clear()
+                        lifecycleScope.launch {
+                            viewModel.saveType(dialogBinding.chMuseum.text.toString())
+                            viewModel.getTravelType(
+                                token,
+                                page,
+                                dialogBinding.chMuseum.text.toString()
+                            )
+                        }
 
-                    R.id.ch_mountain -> Toast.makeText(
-                        requireContext(),
-                        dialogBinding.chMountain.text,
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    }
+
+                    R.id.ch_market -> {
+                        listTravels.clear()
+                        lifecycleScope.launch {
+                            viewModel.saveType(dialogBinding.chMarket.text.toString())
+                            viewModel.getTravelType(
+                                token,
+                                page,
+                                dialogBinding.chMarket.text.toString()
+                            )
+                        }
+                    }
+
+                    R.id.ch_culinary -> {
+                        listTravels.clear()
+                        lifecycleScope.launch {
+                            viewModel.saveType(dialogBinding.chCulinary.text.toString())
+                            viewModel.getTravelType(
+                                token,
+                                page,
+                                dialogBinding.chCulinary.text.toString()
+                            )
+                        }
+                    }
+
+                    R.id.ch_nature -> {
+                        listTravels.clear()
+                        lifecycleScope.launch {
+                            viewModel.saveType(dialogBinding.chNature.text.toString())
+                            viewModel.getTravelType(
+                                token,
+                                page,
+                                dialogBinding.chNature.text.toString()
+                            )
+                        }
+                    }
                 }
                 dialog.dismiss()
             }
+
         }
     }
 
@@ -152,8 +229,8 @@ class HomeFragment : Fragment(), ItemListener {
         _binding = null
     }
 
-    private fun initRecycleView(listTravel: List<TravelResponse.Data>) {
-        val adapter = TravelAdapter(listTravel, this)
+    private fun initRecycleView(listTravel: List<TravelResponse.DataTravel>) {
+        adapter = TravelAdapter(listTravel, this)
         val layoutManager = LinearLayoutManager(requireContext())
         binding?.rvTourism?.layoutManager = layoutManager
         binding?.rvTourism?.adapter = adapter
@@ -166,7 +243,13 @@ class HomeFragment : Fragment(), ItemListener {
                 val firstVisibleItem = layoutManager.findFirstVisibleItemPosition()
 
                 if (firstVisibleItem + visible >= totalItem && firstVisibleItem >= 0) {
-                    viewModel.getTravel(index + 1, token)
+                    page++
+                    lifecycleScope.launch {
+                        viewModel.getTravelType(token, page, viewModel.getType().toString())
+                    }
+
+
+
                 }
             }
         })
@@ -174,10 +257,10 @@ class HomeFragment : Fragment(), ItemListener {
     }
 
 
-
-
-    override fun onClick() {
-        startActivity(Intent(requireActivity(), DetailActivity::class.java))
+    override fun onClick(id: Int) {
+        val intent = Intent(requireActivity(), DetailActivity::class.java)
+        intent.putExtra(ID_TRAVEL, id)
+        startActivity(intent)
     }
 
 

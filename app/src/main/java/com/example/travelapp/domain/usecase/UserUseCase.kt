@@ -34,4 +34,20 @@ class UserUseCase @Inject constructor(private val userRepository: UserRepository
         return userRepository.getProfile()
     }
 
+    suspend fun saveStart(start: Boolean) {
+        userRepository.saveStart(start)
+    }
+
+    fun getStart(): Boolean {
+        return userRepository.getStart()
+    }
+
+    suspend fun saveType(type: String) {
+        userRepository.saveType(type)
+
+    }
+
+    fun getType(): String? {
+        return userRepository.getType()
+    }
 }

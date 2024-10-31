@@ -31,6 +31,11 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if (viewModel.getLogin() != null){
+            startActivity(Intent(this,MainActivity::class.java))
+            finish()
+        }
         binding.apply {
             btnLogin.setOnClickListener {
                 if (validateLogin()) {

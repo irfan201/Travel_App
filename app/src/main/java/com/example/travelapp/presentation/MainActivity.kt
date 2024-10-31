@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import com.example.travelapp.R
 import com.example.travelapp.databinding.ActivityMainBinding
 import com.example.travelapp.presentation.home.HomeFragment
+import com.example.travelapp.presentation.itinerary.ListItineraryFragment
 import com.example.travelapp.presentation.profile.ProfileFragment
+import com.example.travelapp.presentation.search.SearchActivity
 import com.google.android.material.navigation.NavigationBarView.OnItemSelectedListener
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         replaceFragment(HomeFragment())
         binding.fabSearch.setOnClickListener {
-            startActivity(Intent(this,SearchActivity::class.java))
+            startActivity(Intent(this, SearchActivity::class.java))
         }
 
         binding.bottomNav.setOnItemSelectedListener(object : OnItemSelectedListener {
@@ -40,6 +42,11 @@ class MainActivity : AppCompatActivity() {
 
                     R.id.btn_message ->{
                         replaceFragment(MessageFragment())
+                        true
+                    }
+
+                    R.id.btn_itinerary ->{
+                        replaceFragment(ListItineraryFragment())
                         true
                     }
 

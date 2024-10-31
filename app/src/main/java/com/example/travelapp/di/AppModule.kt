@@ -11,6 +11,8 @@ import com.example.travelapp.data.source.local.LocalDataSource
 import com.example.travelapp.data.source.local.LocalDataSourceImpl
 import com.example.travelapp.data.source.local.preference.UserDataStore
 import com.example.travelapp.data.source.local.preference.dataStore
+import com.example.travelapp.data.source.local.room.TravelDao
+import com.example.travelapp.data.source.local.room.TravelDatabase
 import com.example.travelapp.data.source.remote.ApiService
 import com.example.travelapp.data.source.remote.NetworkConfig
 import com.example.travelapp.data.source.remote.RemoteDataSource
@@ -52,14 +54,26 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideTravelRepository(remoteDataSource: RemoteDataSource): TravelRepository {
-        return TravelRepositoryImpl(remoteDataSource)
+    fun provideTravelRepository(remoteDataSource: RemoteDataSource,localDataSource: LocalDataSource): TravelRepository {
+        return TravelRepositoryImpl(remoteDataSource,localDataSource)
     }
 
     @Provides
     @Singleton
-    fun provideLocalDataSource(userDataStore: UserDataStore): LocalDataSource {
-        return LocalDataSourceImpl(userDataStore)
+    fun provideLocalDataSource(userDataStore: UserDataStore,travelDao: TravelDao): LocalDataSource {
+        return LocalDataSourceImpl(userDataStore,travelDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTravelDatabase(@ApplicationContext context: Context): TravelDatabase {
+        return TravelDatabase.getInstance(context)
 
     }
+
+    @Provides
+    @Singleton
+    fun provideTravelDao(travelDatabase: TravelDatabase) = travelDatabase.travelDao()
+
+
 }

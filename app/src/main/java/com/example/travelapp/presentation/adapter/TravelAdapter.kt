@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.travelapp.data.model.TravelResponse
 import com.example.travelapp.databinding.ItemTourismBinding
 
-class TravelAdapter(private var listTravel: List<TravelResponse.Data>, private val listener: ItemListener): RecyclerView.Adapter<TravelAdapter.MyViewHolder>() {
+class TravelAdapter(private var listTravel: List<TravelResponse.DataTravel>, private val listener: ItemListener): RecyclerView.Adapter<TravelAdapter.MyViewHolder>() {
     class MyViewHolder(val binding: ItemTourismBinding): RecyclerView.ViewHolder(binding.root) {
 
     }
@@ -31,11 +31,11 @@ class TravelAdapter(private var listTravel: List<TravelResponse.Data>, private v
                 .into(ivTourism)
         }
         holder.binding.root.setOnClickListener {
-            listener.onClick()
+            listener.onClick(travel.id)
         }
     }
 
-    fun updateTravel(newTravel : List<TravelResponse.Data>){
+    fun updateTravel(newTravel : List<TravelResponse.DataTravel>){
         listTravel = newTravel
         notifyDataSetChanged()
     }

@@ -30,4 +30,7 @@
     <string name="sajib_rahman">Sajib Rahman</string>
     <string name="message">Hi, John! 👋 How are you doing?</string>
     <string name="_08_42">08:42</string>
+    <string name="your_destination">Your Destination</string>
+    <string name="delete_destination">Delete Destination</string>
+    <string name="all_destination">All Destination</string>
 </resources>

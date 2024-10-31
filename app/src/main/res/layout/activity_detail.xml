@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.DetailActivity">
+    tools:context=".presentation.detail.DetailActivity">
 
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -38,8 +38,8 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/iv_back"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/iv_back" />
 
@@ -88,7 +88,7 @@
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="24dp"
                 android:numStars="5"
                 android:progressTint="#FFEB3B"
                 android:rating="4.5"
@@ -109,6 +109,28 @@
                 app:layout_constraintStart_toEndOf="@id/rate_destination_detail"
                 app:layout_constraintTop_toTopOf="@id/rate_destination_detail" />
 
+            <ImageView
+                android:id="@+id/iv_activity"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="30dp"
+                android:src="@drawable/action"
+                app:layout_constraintBottom_toBottomOf="@id/tv_location_detail"
+                app:layout_constraintEnd_toStartOf="@id/tv_activity"
+                app:layout_constraintTop_toTopOf="@id/tv_location_detail" />
+
+            <TextView
+                android:id="@+id/tv_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/sf_ui_display_regular"
+                android:text="Activity"
+                android:textColor="@color/text_color"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_activity"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/iv_activity" />
 
             <TextView
                 android:id="@+id/tv_about_tittle"

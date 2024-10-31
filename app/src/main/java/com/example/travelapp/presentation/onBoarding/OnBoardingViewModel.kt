@@ -8,7 +8,11 @@ import javax.inject.Inject
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(private val userUseCase: UserUseCase) :ViewModel() {
 
-    suspend fun getLogin():String?{
+     fun getLogin():String?{
         return userUseCase.getLogin()
+    }
+
+    suspend fun saveStart(start:Boolean){
+        userUseCase.saveStart(start)
     }
 }

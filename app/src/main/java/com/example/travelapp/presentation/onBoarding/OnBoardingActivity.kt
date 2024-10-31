@@ -25,6 +25,7 @@ class OnBoardingActivity : AppCompatActivity() {
 
         binding.btnStart.setOnClickListener {
             lifecycleScope.launch {
+                viewModel.saveStart(true)
                 if (viewModel.getLogin() != null){
                     startActivity(Intent(this@OnBoardingActivity, MainActivity::class.java))
                     finish()

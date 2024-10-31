@@ -16,6 +16,10 @@ interface UserRepository {
     fun getLogin(): String?
     suspend fun saveProfile(userData: User)
     fun getProfile(): User
+    suspend fun saveStart(start: Boolean)
+    fun getStart(): Boolean
+    suspend fun saveType(type: String)
+    fun getType(): String?
 }
 
 class UserRepositoryImpl @Inject constructor(
@@ -45,6 +49,22 @@ class UserRepositoryImpl @Inject constructor(
 
     override fun getProfile(): User {
         return localDataSource.getProfile()
+    }
+
+    override suspend fun saveStart(start: Boolean) {
+        localDataSource.saveStart(start)
+    }
+
+    override fun getStart(): Boolean {
+        return localDataSource.getStart()
+    }
+
+    override suspend fun saveType(type: String) {
+        localDataSource.saveType(type)
+    }
+
+    override fun getType(): String? {
+        return localDataSource.getType()
     }
 
 
